@@ -5,6 +5,7 @@ from constants import COMMAND_NOT_STARTED_STATUS
 
 def insert_to_mongodb(command, status):
     client = pymongo.MongoClient(
+        # TODO: Set a env variable for this password
         "mongodb+srv://malonso:PASSWORD@cluster0.aba4cnn.mongodb.net/?retryWrites=true&w=majority"
     )
     
