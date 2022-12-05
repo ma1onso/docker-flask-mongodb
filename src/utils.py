@@ -12,4 +12,4 @@ def insert_to_mongodb(command, status):
     
     return db.cmd_collection.insert_one({
         'command': 'ps', 'status': COMMAND_NOT_STARTED_STATUS
-    }).inserted_id
+    }).inserted_id.__str__()
