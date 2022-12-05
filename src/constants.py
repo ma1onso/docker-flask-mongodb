@@ -1,0 +1,1 @@
+COMMAND_NOT_STARTED_STATUS = 'not_started'
