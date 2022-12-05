@@ -5,5 +5,5 @@ RUN apt update -y
 RUN apt install python3.8 python3-pip -y
 RUN pip install -r requirements.txt
 
-CMD ["flask", "--app", "src/hello", "run"]
+CMD ["flask", "--app", "src/app", "run", "--host=0.0.0.0"]
 EXPOSE 5000
