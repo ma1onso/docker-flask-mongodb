@@ -12,4 +12,3 @@ def new_task():
     id = insert_to_mongodb(command=command, status=COMMAND_NOT_STARTED_STATUS)
 
     return {'id': id}
-
