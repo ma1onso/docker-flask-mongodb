@@ -8,7 +8,7 @@ class MongoClient:
     def __init__(self):
         self.client = pymongo.MongoClient(
             # TODO: Set a env variable for this password
-            "mongodb+srv://malonso:Os8OvUHW1ddaaWVB@cluster0.aba4cnn.mongodb.net/?retryWrites=true&w=majority"
+            "mongodb+srv://malonso:PASSWORD@cluster0.aba4cnn.mongodb.net/?retryWrites=true&w=majority"
         )
         self.db = self.client.commands
 
