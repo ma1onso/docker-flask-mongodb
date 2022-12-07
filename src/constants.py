@@ -1,1 +1,2 @@
 COMMAND_NOT_STARTED_STATUS = 'not_started'
+COMMAND_COMPLETED_STATUS = 'completed'
