@@ -3,9 +3,10 @@ from threading import Thread
 
 from flask import Flask
 from flask import request
+from bson.objectid import ObjectId
 
 from utils import MongoClient, insert_command_result_and_update_command_status
-from .constants import COMMAND_NOT_STARTED_STATUS
+from constants import COMMAND_NOT_STARTED_STATUS
 
 app = Flask(__name__)
 
@@ -22,9 +23,8 @@ def new_task():
     return {'id': id}
 
 
-# TODO: complete this endpoint
-# @app.route('/get_ouput/:id', methods=['GET'])
-# def get_output(id):
-#     mongo_client = MongoClient()
+@app.route('/get_output/<id>', methods=['GET'])
+def get_output(id):
+    mongo_client = MongoClient()
 
-#     return {'output': mongo_client.get_command_output(id)}
+    return {'output': mongo_client.get_command_output_by_id(id).get('output')}
