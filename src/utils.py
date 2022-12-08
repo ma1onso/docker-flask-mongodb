@@ -3,6 +3,7 @@ import subprocess
 import pymongo
 
 from bson.objectid import ObjectId
+from dotenv import load_dotenv
 
 from constants import COMMAND_NOT_STARTED_STATUS, COMMAND_COMPLETED_STATUS
 
@@ -11,10 +12,9 @@ class MongoClient:
     """ Class to encapsulate the main actions to perform on mongodb cloud
     """
     def __init__(self):
-        mongo_db_password = os.getenv('MONGO_DB_PASSWORD', '')
-
+        load_dotenv()
         self.client = pymongo.MongoClient(
-            f"mongodb+srv://malonso:{mongo_db_password}@cluster0.aba4cnn.mongodb.net/?retryWrites=true&w=majority"
+            os.getenv('MONGODB_URL', '')
         )
         self.db = self.client.commands
 
