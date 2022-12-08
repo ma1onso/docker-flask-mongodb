@@ -49,4 +49,4 @@ def insert_command_result_and_update_command_status(command: str, mongod_db_id: 
     mongo_client = MongoClient()
     mongo_client.insert_command_output(command_output.stdout.decode())
 
-    mongo_client.update_command_status(id, COMMAND_COMPLETED_STATUS)
+    mongo_client.update_command_status(mongod_db_id, COMMAND_COMPLETED_STATUS)
