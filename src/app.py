@@ -5,7 +5,7 @@ from flask import Flask
 from flask import request
 
 from utils import MongoClient, insert_command_result_and_update_command_status
-from constants import COMMAND_NOT_STARTED_STATUS
+from .constants import COMMAND_NOT_STARTED_STATUS
 
 app = Flask(__name__)
 

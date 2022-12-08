@@ -1,7 +1,9 @@
 import subprocess
 import pymongo
 
-from constants import COMMAND_NOT_STARTED_STATUS
+from bson.objectid import ObjectId
+
+from .constants import COMMAND_NOT_STARTED_STATUS, COMMAND_COMPLETED_STATUS
 
 
 class MongoClient:
@@ -22,8 +24,12 @@ class MongoClient:
             'output': command_output,
         })
 
-    def find_not_execute_commands(self):
-        return self.db.cmd_collection.find({'status': COMMAND_NOT_STARTED_STATUS})
+    def find_by_id(self, id: str):
+        return self.db.cmd_collection.find_one({"_id": id})
+
+    def update_by_id(self, id: str, status: str):
+        id = ObjectId(id)
+        return self.db.cmd_collection.update_one({'command': 'ps'}, {'$set': {'status': status}})
 
 
 def insert_command_result_and_update_command_status(command: str, mongod_db_id: str):
@@ -32,4 +38,4 @@ def insert_command_result_and_update_command_status(command: str, mongod_db_id: 
     mongo_client = MongoClient()
     mongo_client.insert_command_output(command_output.stdout.decode())
 
-    # TODO: find and update mongodb record with the status COMMAND_COMPLETED_STATUS
+    mongo_client.update_by_id(id, COMMAND_COMPLETED_STATUS)
