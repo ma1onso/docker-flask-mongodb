@@ -1,8 +1,9 @@
 # docker-flask-mongodb
 
 ## Preparation
-- Create a .env file into src folder, and put your own mongodb cluster information, using the name: CLUSTER_MONGODB_INSTANCE.
-CLUSTER_MONGODB_INSTANCE="mongodb+srv://USER:PASSWORD@cluster0.aba4cnn.mongodb.net/?retryWrites=true&w=majority"
+- Create a .env file into src folder, and put your own mongodb cluster information (from https://cloud.mongodb.com), using the name: MONGODB_URL.
+Example:
+MONGODB_URL="mongodb+srv://USER:PASSWORD@cluster0.aba4cnn.mongodb.net/?retryWrites=true&w=majority"
 
 ## Build the project
 
