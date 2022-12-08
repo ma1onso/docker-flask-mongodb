@@ -1,16 +1,16 @@
+import os
 import subprocess
 import pymongo
-
-from bson.objectid import ObjectId
 
 from .constants import COMMAND_NOT_STARTED_STATUS, COMMAND_COMPLETED_STATUS
 
 
 class MongoClient:
     def __init__(self):
+        mongo_db_password = os.getenv('MONGO_DB_PASSWORD', '')
+
         self.client = pymongo.MongoClient(
-            # TODO: Set a env variable for this password
-            "mongodb+srv://malonso:PASSWORD@cluster0.aba4cnn.mongodb.net/?retryWrites=true&w=majority"
+            f"mongodb+srv://malonso:{mongo_db_password}@cluster0.aba4cnn.mongodb.net/?retryWrites=true&w=majority"
         )
         self.db = self.client.commands
 
@@ -24,12 +24,8 @@ class MongoClient:
             'output': command_output,
         })
 
-    def find_by_id(self, id: str):
-        return self.db.cmd_collection.find_one({"_id": id})
-
     def update_by_id(self, id: str, status: str):
-        id = ObjectId(id)
-        return self.db.cmd_collection.update_one({'command': 'ps'}, {'$set': {'status': status}})
+        return self.db.cmd_collection.update_one({'_id': id}, {'$set': {'status': status}})
 
 
 def insert_command_result_and_update_command_status(command: str, mongod_db_id: str):
