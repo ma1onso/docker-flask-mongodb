@@ -2,6 +2,8 @@ import os
 import subprocess
 import pymongo
 
+from bson.objectid import ObjectId
+
 from .constants import COMMAND_NOT_STARTED_STATUS, COMMAND_COMPLETED_STATUS
 
 
@@ -26,7 +28,7 @@ class MongoClient:
     def update_command_status(self, id: str, status: str):
         """ Update command the status of the command executed
         """
-        return self.db.cmd_collection.update_one({'_id': id}, {'$set': {'status': status}})
+        return self.db.cmd_collection.update_one({'_id': ObjectId(id)}, {'$set': {'status': status}})
 
     def insert_command_output(self, command_output: str):
         """ Insert the result of the commands
